@@ -7,7 +7,7 @@ function Footer(props) {
     <div className="footer">
         <div className="container">
             <div className="row justify-content-center">             
-                <div className="col-3 offset-1 col-sm-3">
+                <div className="col-4 offset-1 col-sm-2">
                     <h5>Links</h5>
                     <ul className="list-unstyled">
                        <li><Link to="/home">Home</Link></li>
@@ -16,7 +16,7 @@ function Footer(props) {
                        <li><Link to="/contactus">Contact Us</Link></li>
                     </ul>
                 </div>
-                <div className="col-5 col-sm-4">
+                <div className="col-7 col-sm-5">
                     <h5>Our Address</h5>
                     <address>
                       121, Clear Water Bay Road<br />
