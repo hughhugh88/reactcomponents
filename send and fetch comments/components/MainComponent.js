@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { postComment, fetchComments } from '../redux/ActionCreators';
 import { Modal, ModalHeader, ModalBody, Button, Label, Col, Row } from 'reactstrap';
@@ -8,10 +8,7 @@ import { Control, LocalForm, Errors } from 'react-redux-form';
 
 const mapStateToProps = state => {
    return {
-      dishes: state.dishes,
       comments: state.comments,
-      promotions: state.promotions,
-      leaders: state.leaders
    }       
 }
 
@@ -48,6 +45,7 @@ class Main extends Component {
   handleSubmit(values) {
       this.toggleModal();
       this.props.postComment(values.dishId, values.rating, values.author, values.comment);
+      alert("Current State is: " + JSON.stringify(values));
   }
 
    render() {
@@ -120,10 +118,38 @@ class Main extends Component {
                         </LocalForm>
                   </ModalBody>
                </Modal>
+               
             </div>
+            <RenderComments comments={this.props.comments.comments} />
          </div>
       );
    }
 }
+
+function RenderComments({comments}) {
+   if (comments != null) {
+      return (
+         <div className="col-12 col-md-5 m-1">
+            <h4>Comments</h4>
+            <ul className="list-unstyled">
+            {comments.map((comment) => {
+               return (
+                  <li key={comment.id}>
+                    <p>{comment.comment}</p>
+                    <p>-- {comment.author}</p>                                     
+                  </li>
+               );
+            })}
+            </ul>
+         </div>
+      );
+   }
+   else {
+      return (
+         <div></div>
+      );
+   }
+}
+
 
 export default withRouter(connect(mapStateToProps,mapDispatchToProps)(Main));
